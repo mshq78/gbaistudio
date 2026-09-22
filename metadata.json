@@ -1,0 +1,6 @@
+{
+  "name": "گرابایت | پلتفرم توسعه شایستگی",
+  "description": "پیش‌نمایش تعاملی صفحه اصلی گرابایت - پلتفرم توسعه و یادگیری سرمایه انسانی پردیس نوآوری گرا",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
