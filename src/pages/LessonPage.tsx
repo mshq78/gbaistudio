@@ -8,7 +8,7 @@ export function LessonPage() {
   const { id } = useParams();
 
   const foundLesson = learningDomains
-    .flatMap((d) => d.currentUnit.lessons)
+    .flatMap((d) => d.currentUnit?.lessons || [])
     .find((l) => l.id === id);
 
   const title = foundLesson ? foundLesson.title : continueLearningByte.title;

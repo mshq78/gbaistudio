@@ -81,11 +81,11 @@ export interface LearningDomain {
   id: string;
   name: string;
   shortName: string;
-  focusTitle: string;
-  completedBytes: number;
-  totalBytes: number;
-  activePathTitle: string;
-  currentUnit: LearningUnit;
+  focusTitle?: string;
+  completedBytes?: number;
+  totalBytes?: number;
+  activePathTitle?: string;
+  currentUnit?: LearningUnit;
   certificateTitle?: string;
 }
 
