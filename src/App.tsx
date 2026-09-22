@@ -147,8 +147,8 @@ function AppShell() {
             />
           </Routes>
 
-          {/* Bottom Persistent Navigation (Active on main tabs or available throughout) */}
-          <BottomNav />
+          {/* Bottom Persistent Navigation (Active strictly on main tabs) */}
+          {isMainTab && <BottomNav />}
         </div>
       </main>
     </div>

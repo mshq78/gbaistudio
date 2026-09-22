@@ -25,26 +25,26 @@ export function HomePage({
   onToggleChallengeToday,
 }: HomePageProps) {
   return (
-    <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 animate-in fade-in duration-150">
-      {/* 1. Header: lightweight, not a boxed card */}
+    <div className="flex-1 overflow-y-auto no-scrollbar px-4 pt-2.5 pb-4 space-y-3 animate-in fade-in duration-150">
+      {/* 1. Header: Lightweight, unboxed */}
       <Header user={user} unreadCount={unreadCount} />
 
-      {/* 2. Primary Context Hero: ACTIVE EVENT TODAY */}
+      {/* 2. ONE Dominant Active Event Hero */}
       <EventHero event={activeEvent} />
 
-      {/* 3. Today / Progress: Compact and restrained */}
+      {/* 3. Today Progress: Unboxed, integrated typographic strip */}
       <TodayProgress user={user} />
 
-      {/* 4. Continue Learning: Focused and secondary to hero */}
+      {/* 4. Continue Learning: Natural next action, restrained surface */}
       <ContinueLearning learningByte={continueLearningByte} />
 
-      {/* 5. Active Challenge: Compact 7-day dialogue challenge */}
+      {/* 5. Active Challenge: Restrained friendly gamification */}
       <ActiveChallenge
         challenge={challenge}
         onToggleCompleteToday={onToggleChallengeToday}
       />
 
-      {/* 6. Secondary Discovery: Recent achievement / campus milestone */}
+      {/* 6. Secondary Discovery: Quiet inline achievement */}
       <SecondaryDiscovery achievement={recentAchievement} />
     </div>
   );

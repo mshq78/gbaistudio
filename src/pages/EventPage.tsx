@@ -1,11 +1,10 @@
-import { ArrowRight, Calendar, Clock, MapPin, Sparkles } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowRight, Calendar, Clock, MapPin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { activeEvent } from '../data/mockData.ts';
 import { toPersianDigits } from '../utils/persian.ts';
 
 export function EventPage() {
   const navigate = useNavigate();
-  const { id } = useParams();
 
   return (
     <div className="flex-1 flex flex-col justify-between p-4 space-y-4 text-slate-800 animate-in fade-in duration-150">
@@ -25,42 +24,30 @@ export function EventPage() {
           </span>
         </div>
 
-        {/* Event Header Banner in Gerabyte Visual Shell */}
-        <div className="p-4 rounded-2xl bg-gradient-to-bl from-[#15537F] via-[#1E6FA8] to-[#124B70] text-white space-y-2.5 shadow-sm">
-          <span className="text-[11px] font-medium text-blue-200 bg-white/10 px-2.5 py-0.5 rounded-full inline-block">
-            {activeEvent.category}
-          </span>
-          <h1 className="text-xl font-black tracking-tight">{activeEvent.title}</h1>
-          <p className="text-xs font-medium text-blue-100">{activeEvent.subtitle}</p>
+        {/* Minimal Event Summary */}
+        <div className="p-4 rounded-2xl bg-gradient-to-br from-[#1B6396] via-[#1E6FA8] to-[#134D73] text-white space-y-2">
+          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/15 text-[11px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2E9E6B]" />
+            <span>{activeEvent.statusText}</span>
+          </div>
 
-          <div className="pt-2 border-t border-white/15 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-blue-100/90">
-            <div className="flex items-center gap-1.5">
+          <h1 className="text-xl font-black">{activeEvent.title}</h1>
+          <p className="text-xs text-blue-100">{activeEvent.subtitle}</p>
+
+          <div className="pt-2 border-t border-white/15 flex items-center gap-4 text-xs text-blue-100/90">
+            <div className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-[#009BEC]" />
               <span>{toPersianDigits(activeEvent.time)}</span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-[#1F9A8A]" />
               <span>{activeEvent.location}</span>
             </div>
           </div>
         </div>
 
-        {/* Short Event Status */}
-        <div className="p-3.5 rounded-xl bg-white border border-slate-200/80 space-y-1.5 text-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500">وضعیت رویداد:</span>
-            <span className="font-bold text-[#2E9E6B] bg-[#2E9E6B]/10 px-2 py-0.5 rounded-md">
-              {activeEvent.statusText}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500">محل برگزاری:</span>
-            <span className="font-medium text-slate-800">{activeEvent.room}</span>
-          </div>
-        </div>
-
-        {/* Required Placeholder Notice */}
-        <div className="p-6 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-2 mt-4">
+        {/* Placeholder Notice */}
+        <div className="p-8 rounded-2xl bg-white border border-dashed border-slate-300 text-center space-y-2 mt-4">
           <div className="w-10 h-10 rounded-xl bg-[#1E6FA8]/10 text-[#1E6FA8] flex items-center justify-center mx-auto">
             <Calendar className="w-5 h-5" />
           </div>
@@ -68,7 +55,7 @@ export function EventPage() {
             صفحه رویداد در مرحله بعد طراحی می‌شود
           </h2>
           <p className="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
-            در این فاز تنها معماری ناوبری و جهت‌گیری بصری ارزیابی می‌شود. محتوای کارگاه‌ها و تعاملات رویداد در گام‌های بعدی اضافه خواهد شد.
+            در این فاز تنها ساختار ناوبری و جهت‌گیری بصری ارزیابی می‌شود.
           </p>
         </div>
       </div>

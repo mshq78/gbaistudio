@@ -14,93 +14,72 @@ export function ActiveChallenge({
 }: ActiveChallengeProps) {
   const navigate = useNavigate();
 
-  const handleOpenChallenge = () => {
-    navigate(`/challenges/${challenge.id}`);
-  };
-
   return (
-    <section className="space-y-2">
+    <section className="space-y-1.5 pt-2">
+      {/* Section Label */}
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-sm font-bold text-slate-800 tracking-tight flex items-center gap-1.5">
-          <span>چالش توسعه فردی</span>
+        <h3 className="text-xs font-bold text-slate-500 tracking-tight">
+          چالش هفته
         </h3>
-        <span className="text-xs text-[#F2A93B] font-semibold bg-[#F2A93B]/10 px-2 py-0.5 rounded-md">
-          {toPersianDigits(challenge.rewardPoints)}+ امتیاز رشد
+        <span className="text-[11px] text-[#F2A93B] font-semibold">
+          روز {toPersianDigits(challenge.currentDay)} از {toPersianDigits(challenge.totalDays)}
         </span>
       </div>
 
-      <div className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-2xs">
-        {/* Title and Day Counter */}
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <div 
-            onClick={handleOpenChallenge} 
-            className="cursor-pointer group flex-1"
-          >
-            <h4 className="text-sm font-bold text-slate-800 group-hover:text-[#1E6FA8] transition-colors">
-              {challenge.title}
-            </h4>
-            <p className="text-xs text-slate-500 mt-0.5">
-              {challenge.theme} • روز {toPersianDigits(challenge.currentDay)} از {toPersianDigits(challenge.totalDays)}
-            </p>
-          </div>
-
+      {/* Integrated surface matching learning section */}
+      <div className="p-3.5 rounded-xl bg-white/70 border border-slate-200/60 space-y-2.5">
+        {/* Title row */}
+        <div className="flex items-center justify-between gap-2">
           <button
             type="button"
-            onClick={handleOpenChallenge}
-            className="text-xs text-[#1E6FA8] hover:text-[#009BEC] font-medium flex items-center gap-0.5 pt-0.5 cursor-pointer"
+            onClick={() => navigate(`/challenges/${challenge.id}`)}
+            className="text-right text-sm font-bold text-slate-800 hover:text-[#1E6FA8] transition-colors cursor-pointer flex items-center gap-1 group"
           >
-            <span>جزئیات</span>
-            <ChevronLeft className="w-3.5 h-3.5" />
+            <span>{challenge.title}</span>
+            <ChevronLeft className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#1E6FA8] group-hover:-translate-x-0.5 transition-all" />
           </button>
-        </div>
 
-        {/* 7-Day Micro Progress Dots */}
-        <div className="flex items-center gap-1.5 mb-3">
-          {Array.from({ length: challenge.totalDays }).map((_, idx) => {
-            const dayNum = idx + 1;
-            const isCompleted = dayNum < challenge.currentDay || (dayNum === challenge.currentDay && challenge.completedToday);
-            const isCurrent = dayNum === challenge.currentDay && !challenge.completedToday;
+          {/* 7-Day Micro Dots */}
+          <div className="flex items-center gap-1 shrink-0">
+            {Array.from({ length: challenge.totalDays }).map((_, idx) => {
+              const dayNum = idx + 1;
+              const isCompleted = dayNum < challenge.currentDay || (dayNum === challenge.currentDay && challenge.completedToday);
+              const isCurrent = dayNum === challenge.currentDay && !challenge.completedToday;
 
-            return (
-              <div
-                key={dayNum}
-                className="flex-1 flex flex-col items-center gap-1"
-              >
-                <div
-                  className={`w-full h-1.5 rounded-full transition-all ${
+              return (
+                <span
+                  key={dayNum}
+                  className={`w-2 h-1 rounded-full transition-all ${
                     isCompleted
                       ? 'bg-[#2E9E6B]'
                       : isCurrent
                       ? 'bg-[#F2A93B]'
                       : 'bg-slate-200'
                   }`}
+                  title={`روز ${dayNum}`}
                 />
-                <span className={`text-[10px] ${
-                  isCurrent ? 'font-bold text-[#F2A93B]' : isCompleted ? 'font-medium text-[#2E9E6B]' : 'text-slate-400'
-                }`}>
-                  {toPersianDigits(dayNum)}
-                </span>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         {/* Today's Action Bar */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
-          <p className="text-xs text-slate-600 line-clamp-1 flex-1">
-            <span className="font-semibold text-slate-700">تمرین امروز:</span> {challenge.todayTaskTitle}
+        <div className="pt-2 border-t border-slate-200/50 flex items-center justify-between gap-3 text-xs">
+          <p className="text-slate-600 line-clamp-1 flex-1">
+            <span className="text-slate-400 ml-1">تمرین امروز:</span>
+            {challenge.todayTaskTitle}
           </p>
 
           <button
             type="button"
             onClick={onToggleCompleteToday}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shrink-0 cursor-pointer active:scale-95 ${
+            className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1 transition-all shrink-0 cursor-pointer text-xs active:scale-95 ${
               challenge.completedToday
-                ? 'bg-[#2E9E6B]/10 text-[#2E9E6B] border border-[#2E9E6B]/30'
+                ? 'bg-[#2E9E6B]/15 text-[#2E9E6B]'
                 : 'bg-slate-100 hover:bg-[#F2A93B]/20 text-slate-700 hover:text-amber-800'
             }`}
           >
-            <Check className={`w-3.5 h-3.5 ${challenge.completedToday ? 'stroke-[2.5]' : 'opacity-60'}`} />
+            <Check className={`w-3 h-3 ${challenge.completedToday ? 'stroke-[2.5]' : 'opacity-60'}`} />
             <span>{challenge.completedToday ? 'انجام شد' : 'ثبت تمرین'}</span>
           </button>
         </div>
