@@ -49,4 +49,44 @@ export interface AppNotification {
   read: boolean;
 }
 
+export type LessonState = 'done' | 'in_progress' | 'available' | 'locked' | 'paywalled';
+
+export interface LessonItem {
+  id: string;
+  title: string;
+  durationMinutes: number;
+  xp: number;
+  state: LessonState;
+  order: number;
+}
+
+export interface CheckpointItem {
+  id: string;
+  title: string;
+  durationMinutes: number;
+  xp: number;
+  state: 'locked' | 'available' | 'done';
+}
+
+export interface LearningUnit {
+  id: string;
+  unitNumber: number;
+  title: string;
+  description?: string;
+  lessons: LessonItem[];
+  checkpoint?: CheckpointItem;
+}
+
+export interface LearningDomain {
+  id: string;
+  name: string;
+  shortName: string;
+  focusTitle: string;
+  completedBytes: number;
+  totalBytes: number;
+  activePathTitle: string;
+  currentUnit: LearningUnit;
+  certificateTitle?: string;
+}
+
 export type NavTab = 'home' | 'learning' | 'profile';

@@ -1,10 +1,18 @@
 import { ArrowRight, BookOpen, Clock } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { continueLearningByte } from '../data/mockData.ts';
+import { useNavigate, useParams } from 'react-router-dom';
+import { continueLearningByte, learningDomains } from '../data/mockData.ts';
 import { toPersianDigits } from '../utils/persian.ts';
 
 export function LessonPage() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const foundLesson = learningDomains
+    .flatMap((d) => d.currentUnit.lessons)
+    .find((l) => l.id === id);
+
+  const title = foundLesson ? foundLesson.title : continueLearningByte.title;
+  const duration = foundLesson ? foundLesson.durationMinutes : continueLearningByte.durationMinutes;
 
   return (
     <div className="flex-1 flex flex-col justify-between p-4 space-y-4 text-slate-800 animate-in fade-in duration-150">
@@ -30,18 +38,18 @@ export function LessonPage() {
             <span className="font-semibold text-slate-700">گرابایت</span>
             <div className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-slate-400" />
-              <span>{toPersianDigits(continueLearningByte.durationMinutes)} دقیقه</span>
+              <span>{toPersianDigits(duration)} دقیقه</span>
             </div>
           </div>
 
           <h1 className="text-base font-bold text-slate-800">
-            {continueLearningByte.title}
+            {title}
           </h1>
 
           <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>پیشرفت:</span>
+            <span>وضعیت:</span>
             <span className="font-bold text-[#1F9A8A]">
-              {toPersianDigits(continueLearningByte.progressPercent)}٪
+              آماده برای یادگیری
             </span>
           </div>
         </div>
