@@ -148,7 +148,7 @@ export function LearningPage() {
               {/* Badge row */}
               <div className="flex items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#1E6FA8] bg-[#1E6FA8]/10 px-2.5 py-0.5 rounded-md">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E6FA8] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E6FA8]" />
                   <span>قدم بعدی • در حال یادگیری</span>
                 </span>
 
